@@ -1,10 +1,14 @@
 import React from 'react'
 import { assets } from '../../assets/assets'  
 import { Link } from 'react-router-dom'
+import { useClerk, userButton, useUser } from '@clerk/clerk-react'
 
 const Navbar = () => {
 
   const isCourseListPage = location.pathname.includes('/course-list');
+
+  const {openSignIn} = useClerk();
+  const {user} = useUser();
 
   return (
     <div className={`flex items-center justify-between px-4 sm:px-10 md:px-14 
@@ -16,7 +20,7 @@ const Navbar = () => {
               <button>Become educator</button>
               |  <Link to='/my-enrollments'> My Enrollments</Link>
             </div>
-            <button className='bg-blue-600 text-white px-5 py-2 rounded-full'>
+            <button onClick={()=> openSignIn()} className='bg-blue-600 text-white px-5 py-2 rounded-full'>
               Create Account</button>
         </div>
         {/* For phone screens */}
